@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aperture Studios | Photo & Video Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        /* CSS Variables for a Premium Dark Mode Theme */
+        :root {
+            --bg-dark: #0a0a0a;
+            --bg-card: #171717;
+            --text-main: #f5f5f5;
+            --text-muted: #a3a3a3;
+            --accent: #d4af37; /* Soft Gold */
+            --font-heading: 'Playfair Display', serif;
+            --font-body: 'Inter', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            font-family: var(--font-body);
+            line-height: 1.6;
+            scroll-behavior: smooth;
+        }
+
+        /* Navigation */
+        header {
+            padding: 2rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: absolute;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        .logo {
+            font-family: var(--font-heading);
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--text-main);
+            text-decoration: none;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        nav a {
+            margin-left: 2rem;
+            text-decoration: none;
+            color: var(--text-main);
+            font-size: 0.9rem;
+            font-weight: 300;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: color 0.3s;
+        }
+
+        nav a:hover { color: var(--accent); }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(10, 10, 10, 0.4), rgba(10, 10, 10, 0.9)), 
+                        url('https://images.unsplash.com/photo-1516035069371-29a1b244cc32?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') center/cover;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 5%;
+        }
+
+        .hero h1 {
+            font-family: var(--font-heading);
+            font-size: 5rem;
+            font-weight: 400;
+            margin-bottom: 1rem;
+            letter-spacing: 2px;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            font-weight: 300;
+            color: var(--text-muted);
+            max-width: 600px;
+            margin-bottom: 2.5rem;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            border: 1px solid var(--text-main);
+            color: var(--text-main);
+            text-decoration: none;
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            transition: all 0.4s ease;
+        }
+
+        .btn:hover {
+            background-color: var(--text-main);
+            color: var(--bg-dark);
+        }
+
+        /* Portfolio Grid */
+        .portfolio-section {
+            padding: 6rem 5%;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-header h2 {
+            font-family: var(--font-heading);
+            font-size: 3rem;
+            font-weight: 400;
+            color: var(--text-main);
+        }
+
+        .section-header p { color: var(--accent); letter-spacing: 2px; text-transform: uppercase; font-size: 0.8rem; margin-top: 0.5rem; }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 4px;
+            cursor: pointer;
+            aspect-ratio: 4/5;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.7s ease;
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .gallery-item:hover img { transform: scale(1.08); }
+        .gallery-item:hover .gallery-overlay { opacity: 1; }
+
+        .overlay-title {
+            font-family: var(--font-heading);
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .overlay-category {
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--accent);
+        }
+
+        /* Services & About */
+        .about-section {
+            background-color: var(--bg-card);
+            padding: 6rem 5%;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-text h3 {
+            font-family: var(--font-heading);
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            font-weight: 400;
+        }
+
+        .about-text p { color: var(--text-muted); margin-bottom: 1.5rem; font-weight: 300; }
+
+        .services-list { list-style: none; margin-top: 2rem; }
+        .services-list li {
+            padding: 1rem 0;
+            border-bottom: 1px solid #333;
+            display: flex;
+            justify-content: space-between;
+            font-weight: 300;
+        }
+
+        /* Contact Section */
+        .contact-section { padding: 6rem 5%; text-align: center; }
+        
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .contact-form input, .contact-form textarea {
+            width: 100%;
+            background: transparent;
+            border: none;
+            border-bottom: 1px solid #333;
+            padding: 1rem 0;
+            color: var(--text-main);
+            font-family: var(--font-body);
+            font-size: 1rem;
+        }
+
+        .contact-form input:focus, .contact-form textarea:focus {
+            outline: none;
+            border-bottom-color: var(--accent);
+        }
+
+        footer {
+            text-align: center;
+            padding: 3rem 5%;
+            border-top: 1px solid #222;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            font-weight: 300;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 3.5rem; }
+            .about-section { grid-template-columns: 1fr; }
+            nav { display: none; }
+            header { justify-content: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="#" class="logo">Aperture</a>
+        <nav>
+            <a href="#portfolio">Work</a>
+            <a href="#about">About</a>
+            <a href="#contact">Contact</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <h1>Visual Storytelling</h1>
+        <p>Cinematic videography and fine-art photography capturing the raw, authentic moments of life and commerce.</p>
+        <a href="#portfolio" class="btn">View Portfolio</a>
+    </section>
+
+    <!-- Portfolio Grid -->
+    <section id="portfolio" class="portfolio-section">
+        <div class="section-header">
+            <h2>Selected Works</h2>
+            <p>2023 - 2026 Collections</p>
+        </div>
+
+        <div class="gallery-grid">
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Wedding Photography">
+                <div class="gallery-overlay">
+                    <span class="overlay-title">The Vow</span>
+                    <span class="overlay-category">Wedding & Elopement</span>
+                </div>
+            </div>
+
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1553484771-047a44eee27b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Creative Portrait">
+                <div class="gallery-overlay">
+                    <span class="overlay-title">Mad Hatters Theme</span>
+                    <span class="overlay-category">Concept Photo Challenge</span>
+                </div>
+            </div>
+
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1601506521937-0121a7fc2a6b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Cinematic Video">
+                <div class="gallery-overlay">
+                    <span class="overlay-title">Neon Nights</span>
+                    <span class="overlay-category">Commercial Videography</span>
+                </div>
+            </div>
+
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1542038784456-1ea8e935640e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Studio Portrait">
+                <div class="gallery-overlay">
+                    <span class="overlay-title">Shadow & Light</span>
+                    <span class="overlay-category">Studio Portraits</span>
+                </div>
+            </div>
+            
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1469474968028-56623f02e42e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Landscape">
+                <div class="gallery-overlay">
+                    <span class="overlay-title">Wanderlust</span>
+                    <span class="overlay-category">Travel & Nature</span>
+                </div>
+            </div>
+            
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1574717024453-354056aaddfa?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Product Photography">
+                <div class="gallery-overlay">
+                    <span class="overlay-title">Artisan Brews</span>
+                    <span class="overlay-category">Product & Brand</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About & Services -->
+    <section id="about" class="about-section">
+        <div>
+            <img src="https://images.unsplash.com/photo-1554048612-b6a482bc67e5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Photographer working" style="width: 100%; border-radius: 4px; filter: grayscale(50%);">
+        </div>
+        <div class="about-text">
+            <h3>Behind the Lens</h3>
+            <p>We are a boutique studio specializing in high-end visual production. Whether it's capturing the fleeting moments of a live event, directing a commercial brand shoot, or editing cinematic video sequences, we bring a meticulous eye for detail and color grading to every project.</p>
+            <p>Based in Kempton Park, we travel across Gauteng and beyond to tell compelling visual stories.</p>
+            
+            <ul class="services-list">
+                <li><span>Portrait & Editorial Photography</span> <span>Starting at R 1,500</span></li>
+                <li><span>Commercial Videography (4K)</span> <span>Custom Quote</span></li>
+                <li><span>Wedding & Event Coverage</span> <span>Starting at R 8,500</span></li>
+                <li><span>Drone & Aerial Footage</span> <span>Starting at R 2,000</span></li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact-section">
+        <div class="section-header">
+            <h2>Let's Create Together</h2>
+            <p>Inquire About Availability</p>
+        </div>
+
+        <form class="contact-form" action="#" method="POST">
+            <input type="text" placeholder="Your Name" required>
+            <input type="email" placeholder="Email Address" required>
+            <input type="text" placeholder="Project Type (e.g., Wedding, Commercial)">
+            <textarea rows="4" placeholder="Tell us about your vision and dates..." required></textarea>
+            <button type="submit" class="btn" style="background: transparent; margin-top: 1rem; cursor: pointer;">Send Inquiry</button>
+        </form>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 Aperture Studios. All visual assets protected by copyright.</p>
+    </footer>
+
+</body>
+</html>
